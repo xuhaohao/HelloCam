@@ -4,9 +4,38 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HelloCam"
+        xmlns:WPFMediaKit="clr-namespace:WPFMediaKit.DirectShow.Controls;assembly=WPFMediaKit"
+        xmlns:Views="clr-namespace:HelloCam.Views" 
         mc:Ignorable="d"
-        Title="HelloCam" Height="600" Width="1024">
-    <Grid>
+
+        Title="HelloCam" Height="720" Width="1280" >
+    <Grid >
+        <Grid.Background>
+            <ImageBrush ImageSource="images/1-整个背景.png" />
+        </Grid.Background>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="button1" Content="截图" Height="23"  Width="75" Click="button1_Click" />
+                <Button x:Name="button2" Content="截屏" Height="23"  Width="75" Click="button2_Click" />
+                <Button x:Name="button3" Content="初始化数据库" Height="23"  Width="75" Click="button3_Click" />
+            </StackPanel>
+
+            <Grid x:Name="gridConfig" Grid.Row="1" Margin="250,80,250,170">
+                <Views:SubGroupsListView   />
+            </Grid>
+            <Grid x:Name="gridCamera" Grid.Row="1" Visibility="Collapsed">
+                <Border Margin="400,200">
+                    <WPFMediaKit:VideoCaptureElement x:Name="m_VideoCaptureElement" Stretch="Fill"/>
+                </Border>
+                <Image x:Name="img" Stretch="Fill" Margin="800,200,0,200" Grid.Row="1"/>
+                <Grid Background="Aquamarine" Margin="500,250"  Grid.Row="1"/>
+            </Grid>
+
+        </Grid>
         
     </Grid>
 </Window>

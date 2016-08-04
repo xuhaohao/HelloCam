@@ -20,17 +20,6 @@ namespace HelloCam.Commons
 
         static Dbs()
         {
-            //DbConnection.Initialise(DbPath);
-            //ParamsCache = new ObservableCollection<Params>();
-            //using (TableAdapter<Params> adapter = TableAdapter<Params>.Open())
-            //{
-            //    var list = adapter.Select();
-            //    foreach (Params item in list)
-            //    {
-            //        ParamsCache.Add(item);
-            //    }
-            //}
-
             dbFactory = new OrmLiteConnectionFactory(DbPath, SqliteDialect.Provider);
             ParamsCache = new ObservableCollection<Params>();
             using (var db = dbFactory.Open())
@@ -41,19 +30,53 @@ namespace HelloCam.Commons
                     ParamsCache.Add(item);
                 }
             }
-
         }
 
         public static void UpdateParamValue(Params param)
         {
-            //using (TableAdapter<Params> adapter = TableAdapter<Params>.Open())
-            //{
-            //    adapter.CreateUpdate(param);
-            //}
             using (var db = dbFactory.Open())
             {
                 db.Update(param);
             }
+        }
+
+        public static void Insert<T>(T t) {
+            using (var db = dbFactory.Open())
+            {
+                db.Insert(t);
+            }
+        }
+
+        public static void Delete<T>(T t) {
+            using (var db = dbFactory.Open())
+            {
+                db.Delete(t);
+            }
+        }
+
+        public static void Update<T>(T t)
+        {
+            using (var db = dbFactory.Open())
+            {
+                db.Update<T>(t);
+            }
+        }
+
+        public static List<T> GetAll<T>(string condition)
+        {
+            using (var db = dbFactory.Open())
+            {
+                return db.Select<T>(condition);
+            }
+        }
+
+        public static void Init()
+        {
+            using (var db = dbFactory.Open())
+            {
+                db.CreateTables(true, typeof(Groups), typeof(SubGroups), typeof(Persons));
+            }
+
         }
     }
 }

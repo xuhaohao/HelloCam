@@ -80,12 +80,26 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WPFMediaKit, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dlls\WPFMediaKit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\SubGroups.cs" />
+    <Compile Include="Views\SubGroupsListView.xaml.cs">
+      <DependentUpon>SubGroupsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Groups\CreateSubGroupsView.xaml.cs">
+      <DependentUpon>CreateSubGroupsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Groups\GroupsView.xaml.cs">
+      <DependentUpon>GroupsView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -105,6 +119,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\SubGroupsListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Groups\CreateSubGroupsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Groups\GroupsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Groups.cs" />
@@ -135,7 +161,39 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\1-整个背景.png" />
+    <Resource Include="images\10-签到弹框.png" />
+    <Resource Include="images\11-手动签到-底.png" />
+    <Resource Include="images\12-关闭-默认.png" />
+    <Resource Include="images\13-关闭-按下.png" />
+    <Resource Include="images\14-班级-默认.png" />
+    <Resource Include="images\15-班级-按下.png" />
+    <Resource Include="images\16-班级-框子.png" />
+    <Resource Include="images\17-滑动小块-.png" />
+    <Resource Include="images\18-滑动条-.png" />
+    <Resource Include="images\19-名单-灰状态-默认.png" />
+    <Resource Include="images\2-摄像头.png" />
+    <Resource Include="images\20-名单-默认.png" />
+    <Resource Include="images\21-名单按下.png" />
+    <Resource Include="images\22-学生名单-背景.png" />
+    <Resource Include="images\23-未签到-默认-.png" />
+    <Resource Include="images\24-未签到 按下.png" />
+    <Resource Include="images\25-幼儿园-默认页面.jpg" />
+    <Resource Include="images\26-排名页面.jpg" />
+    <Resource Include="images\27-手动签到班级页.jpg" />
+    <Resource Include="images\28-手动签到名单页.jpg" />
+    <Resource Include="images\3-小太阳幼儿园-.png" />
+    <Resource Include="images\4-管理-默认.png" />
+    <Resource Include="images\5-管理-按下.png" />
+    <Resource Include="images\6-手动签到-默认.png" />
+    <Resource Include="images\7-手动签到-按下.png" />
+    <Resource Include="images\8-统计-默认.png" />
+    <Resource Include="images\9-统计-按下-.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.101.0\build\net451\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.101.0\build\net451\System.Data.SQLite.Core.targets')" />
