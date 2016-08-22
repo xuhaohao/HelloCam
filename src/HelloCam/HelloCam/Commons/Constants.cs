@@ -11,6 +11,9 @@ namespace HelloCam.Commons
         public static String FACE_KEY = "6169d53215b6ffa544382aed1f3e1718";
         public static String FACE_SECRET = "HHiSND6QiIPRsy5MPXvpRZZ_4c_DDtFI";
 
+        public static string Group_Id = "3a0471cd-c8db-4883-8799-edfd9b2f2c38";
+        public static string Group_Name = "3a0471cd-c8db-4883-8799-edfd9b2f2c38";
+
         public static String URL_DETECT = "https://apicn.faceplusplus.com/v2/detection/detect";
         public static String URL_COMPARE = "https://apicn.faceplusplus.com/v2/recognition/compare";
         public static String URL_RECOGNIZE = "https://apicn.faceplusplus.com/v2/recognition/recognize";

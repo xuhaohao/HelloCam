@@ -91,9 +91,9 @@ namespace HelloCam.Commons
                     reader.Close();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                logger.Error("api 访问错误");
+                logger.Error("api 访问错误",ex);
             }
             finally
             {

@@ -28,13 +28,15 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
                             <Grid.Background>
                                 <ImageBrush ImageSource="/HelloCam;component/images/16-班级-框子.png"/>
                             </Grid.Background>
                             <TextBlock Text="{Binding Name}" Margin="20" FontSize="24"/>
                             <Button Content="删除" Grid.Column="2" Margin="16" x:Name="btnClassDelete" Click="btnClassDelete_Click"/>
-                            <Button Content="学生管理" Grid.Column="3" Margin="16" x:Name="btnClassManagement" Click="btnClassManagement_Click"/>
+                            <Button Content="修改" Grid.Column="3" Margin="16" x:Name="btnClassUpdate" Click="btnClassUpdate_Click"/>
+                            <Button Content="学生管理" Grid.Column="4" Margin="16" x:Name="btnClassManagement" Click="btnClassManagement_Click"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

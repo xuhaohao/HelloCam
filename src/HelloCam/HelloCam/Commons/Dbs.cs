@@ -74,9 +74,21 @@ namespace HelloCam.Commons
         {
             using (var db = dbFactory.Open())
             {
-                db.CreateTables(true, typeof(Groups), typeof(SubGroups), typeof(Persons));
+                db.CreateTables(true, typeof(SubGroups), typeof(Persons),typeof(CheckInLog));
             }
 
+        }
+
+        public static void CheckInLog(string groupId, string personName, int action) {
+            using (var db = dbFactory.Open())
+            {
+                CheckInLog checkInLog = new CheckInLog();
+                checkInLog.GroupId = groupId;
+                checkInLog.PersonName = personName;
+                checkInLog.Action = action;
+                checkInLog.TimeTag = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                db.Insert(checkInLog);
+            }
         }
     }
 }

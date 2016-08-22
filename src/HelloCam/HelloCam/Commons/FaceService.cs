@@ -34,10 +34,18 @@ namespace HelloCam.Commons
             app_secret = _app_secret;
             HttpMethod = new HttpMethods();
         }
+
+        //private static FaceService _faceService;
+        //public static FaceService Instance() {
+        //    if (_faceService == null) {
+        //        _faceService = new FaceService(Constants.FACE_KEY, Constants.FACE_SECRET);
+        //    }
+        //    return _faceService;
+        //}
         /// <summary>
         /// 创建FaceService服务类
         /// </summary>
-        public FaceService()
+        private FaceService()
         {
         }
         #endregion

@@ -1,7 +1,5 @@
 ﻿using HelloCam.Commons;
 using HelloCam.Models;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
@@ -33,7 +31,6 @@ namespace HelloCam.Views
                 subGroups.Add(item);
             }
             lbClasses.ItemsSource = subGroups;
-
         }
 
         private ObservableCollection<SubGroups> subGroups = new ObservableCollection<SubGroups>();
@@ -42,23 +39,29 @@ namespace HelloCam.Views
 
         private void btnCreate_Click(object sender, RoutedEventArgs e)
         {
-            var id = Guid.NewGuid().ToString();
             if (lbPersons.Visibility == Visibility.Visible)
             {
                 //创建人
                 var subgroup = btnCreate.Tag as SubGroups;
                 if (subgroup != null) {
-                    var person = new Persons() { Id = id, Name = "儿童" + id,SubGroupId = subgroup.Id };
-                    Dbs.Insert(person);
-                    persons.Add(person);
+                    var person = new Persons() { SubGroupId = subgroup.Id };
+                    PersonWindow.ShowDialog(person, r => {
+                        FaceService faceService = new FaceService(Constants.FACE_KEY, Constants.FACE_SECRET);
+                        var result = faceService.Group_AddPersonByGroupIdPersonId(Constants.Group_Id, r.Id);
+                        if (result.success) {
+                            Dbs.Insert(r);
+                            persons.Add(r);
+                        }
+                    });
                 }
             }
             else
             {
                 //创建班级
-                var subGroup = new SubGroups() { Id = id, Name = "班级" + id };
-                Dbs.Insert(subGroup);
-                subGroups.Add(subGroup);
+                ClassWindow.ShowDialog(new SubGroups(),subGroup => {
+                    Dbs.Insert(subGroup);
+                    subGroups.Add(subGroup);
+                });
             }
         }
 
@@ -103,7 +106,12 @@ namespace HelloCam.Views
 
         private void btnPersonUpdate_Click(object sender, RoutedEventArgs e)
         {
-
+            var person = (sender as Button).DataContext as Persons; if (person != null)
+            {
+                PersonWindow.ShowDialog(person, r => {
+                    Dbs.Update(r);
+                });
+            }
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
@@ -115,6 +123,17 @@ namespace HelloCam.Views
             }
             else {
                 //退出管理界面
+            }
+        }
+
+        private void btnClassUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            var subGroup = (sender as Button).DataContext as SubGroups;
+            if (subGroup != null)
+            {
+                ClassWindow.ShowDialog(subGroup, r => {
+                    Dbs.Update(r);
+                });
             }
         }
     }

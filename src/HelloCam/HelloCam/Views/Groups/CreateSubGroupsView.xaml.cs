@@ -17,9 +17,9 @@ namespace HelloCam.Views.Groups
     /// <summary>
     /// CreateSubGroupsWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class CreateSubGroupsWindow : UserControl
+    public partial class CreateSubGroupsView : UserControl
     {
-        public CreateSubGroupsWindow()
+        public CreateSubGroupsView()
         {
             InitializeComponent();
         }

@@ -34,27 +34,12 @@ namespace HelloCam
         }
         private static log4net.ILog log = log4net.LogManager.GetLogger(typeof(MainWindow));
 
-        public FaceService faceService = new FaceService(Constants.FACE_KEY, Constants.FACE_SECRET);
-
         private string fileName = "";
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            //m_VideoCaptureElement.
-            //RenderTargetBitmap bmp = new RenderTargetBitmap((int)m_VideoCaptureElement.ActualWidth, (int)m_VideoCaptureElement.ActualHeight, 96, 96, PixelFormats.Rgb24);
-            //bmp.Render(m_VideoCaptureElement);
-
-            //BitmapEncoder encoder = new JpegBitmapEncoder();
-            //encoder.Frames.Add(BitmapFrame.Create(bmp));
-            //string now = DateTime.Now.Year + "" + DateTime.Now.Month + "" + DateTime.Now.Day + "" + DateTime.Now.Hour + "" + DateTime.Now.Minute + "" + DateTime.Now.Second;
-            //string filename = "E:\\" + now + "pic.jpg";
-            //FileStream fstream = new FileStream(filename, FileMode.Create);
-            //encoder.Save(fstream);
-            //fstream.Close();
 
             RenderTargetBitmap bmp = new RenderTargetBitmap((int)m_VideoCaptureElement.ActualWidth, (int)m_VideoCaptureElement.ActualHeight, 96, 96, PixelFormats.Default);
-            //m_VideoCaptureElement.Measure(m_VideoCaptureElement.RenderSize);
-            //m_VideoCaptureElement.Arrange(new Rect(m_VideoCaptureElement.RenderSize));
             bmp.Render(m_VideoCaptureElement);
             BitmapEncoder encoder = new JpegBitmapEncoder();
             encoder.Frames.Add(BitmapFrame.Create(bmp));           using (MemoryStream ms = new MemoryStream())
@@ -64,8 +49,8 @@ namespace HelloCam
                 fileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".jpg";
                 File.WriteAllBytes(fileName, captureData);
             }
-            string path = System.AppDomain.CurrentDomain.BaseDirectory + fileName;
-            if (System.IO.File.Exists(path))
+            string path = AppDomain.CurrentDomain.BaseDirectory + fileName;
+            if (File.Exists(path))
             {
                 img.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
                 MessageBox.Show("照片保存在Debug目录下photos文件夹内。");
@@ -77,21 +62,41 @@ namespace HelloCam
 
         private void button2_Click(object sender, RoutedEventArgs e)
         {
+            FaceService faceService = new FaceService(Constants.FACE_KEY, Constants.FACE_SECRET);
+
             var filePath = @"C:\Users\hh\Desktop\20160731233904.jpg";
-            //var result = faceService.Detection_DetectImg(@"C:\Users\hh\Desktop\20160731233904.jpg");
+            //dynamic result = faceService.Detection_DetectImg(@"C:\Users\hh\Desktop\20160731233904.jpg");
             //var a = result.face;
 
+            //if (result.face != null && result.face.Count > 0) {
+            //    var id = Guid.NewGuid().ToString();
+            //    result = faceService.Person_Create(id, id, id, Constants.Group_Id, Constants.Group_Name);
+            //}
             //var result = faceService.Recognition_IdentifyImgById("group_id", filePath);
+
+
+
+
+            //var a = result;
             var id = Guid.NewGuid().ToString();
-            var result = faceService.Group_CreateByIdList(id);
-
-
-            var a = result;
+            //var result = faceService.Group_CreateByIdList(id);
+            //var result = faceService.Group_GetInfoById(Constants.Group_Id);
+            //var result = faceService.Group_AddPersonByGroupIdPersonId(Constants.Group_Id, id);
+            //var result = faceService.Group_AddPersonByGroupIdPersonId(Constants.Group_Id,)
+            //var result = faceService.Person_Create(id, "c34e695176d5956a43443321170dec9e", id, Constants.Group_Id, Constants.Group_Name);
+            dynamic r = result;
+            
         }
 
         private void button3_Click(object sender, RoutedEventArgs e)
         {
             Dbs.Init();
+        }
+
+        private void btnCheckin_Click(object sender, RoutedEventArgs e)
+        {
+            Dbs.CheckInLog("13131", "131313", 0);
+            MessageBox.Show("提交考勤");
         }
     }
 }
